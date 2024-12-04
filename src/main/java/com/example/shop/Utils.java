@@ -83,16 +83,16 @@ public class Utils {
         alert.showAndWait();
     }
 
-    interface OnControllerReadyListener<T> {
-        void onControllerReady(T controller);
-    }
-
     public static void runCatching(Catching block) {
         try {
             block.run();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    interface OnControllerReadyListener<T> {
+        void onControllerReady(T controller);
     }
 
     public interface Catching {
