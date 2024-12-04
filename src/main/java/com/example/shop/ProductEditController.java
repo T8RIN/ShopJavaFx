@@ -1,14 +1,13 @@
 package com.example.shop;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import static com.example.shop.Utils.showErrorMessage;
+import static com.example.shop.Utils.showMessage;
 
 public class ProductEditController {
     @FXML
@@ -19,10 +18,6 @@ public class ProductEditController {
     private TextField quantityField;
     @FXML
     private TextField priceField;
-    @FXML
-    private Button okButton;
-    @FXML
-    private Button cancelButton;
 
     private SaveListener saveListener;
 
@@ -38,36 +33,31 @@ public class ProductEditController {
         String price = priceField.getText();
 
         if (id.isEmpty() || name.isEmpty() || quantity.isEmpty() || price.isEmpty()) {
-            showErrorMessage("Все поля должны быть заполнены.");
+            showErrorMessage(Strings.AllFieldShouldBeFilled);
             return;
         }
 
         try {
             Integer.parseInt(quantity);
         } catch (NumberFormatException e) {
-            showErrorMessage("Количество должно быть числом.");
+            showErrorMessage(Strings.QuantityMustBeNumber);
             return;
         }
 
         try {
             Double.parseDouble(price);
         } catch (NumberFormatException e) {
-            showErrorMessage("Стоимость должна быть числом.");
+            showErrorMessage(Strings.CostMustBeNumber);
             return;
         }
 
-        if (saveListener.save(
-                new Product(name, Integer.parseInt(id), Integer.parseInt(quantity), Double.parseDouble(price))
-        )) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Данные сохранены");
-            alert.setHeaderText(null);
-            alert.setContentText("Артикул: " + id + "\nНаименование: " + name + "\nКоличество: " + quantity + "\nСтоимость: " + price);
-            alert.showAndWait();
+        var product = new Product(name, Integer.parseInt(id), Integer.parseInt(quantity), Double.parseDouble(price));
+        if (saveListener.save(product)) {
+            showMessage(Strings.Saved, product.toString());
 
             handleCancel();
         } else {
-            showErrorMessage("Что-то пошло не так");
+            showErrorMessage(Strings.SomethingWentWrong);
         }
     }
 

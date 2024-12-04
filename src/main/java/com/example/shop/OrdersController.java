@@ -68,7 +68,7 @@ public class OrdersController {
         productsTable.setItems(products);
 
         statusComboBox.setItems(statusList);
-        statusComboBox.setValue(Order.Status.None);
+        statusComboBox.setValue(Order.Status.New);
 
         ordersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldOrder, newOrder) -> {
             if (newOrder != null) {
@@ -79,10 +79,6 @@ public class OrdersController {
         saveButton.setOnAction(event -> handleSave());
         cancelButton.setOnAction(event -> handleCancel());
 
-        loadOrders();
-    }
-
-    private void loadOrders() {
         orders.setAll(OrdersDatabase.INSTANCE.data);
     }
 

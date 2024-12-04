@@ -13,7 +13,7 @@ public record Order(Integer id, String date, String login, Status status) {
             if (order.id.equals(this.id)) {
                 var productIds = ProductOrdersDatabase.INSTANCE.data.stream().filter(productOrder -> productOrder.orderId().equals(order.id)).map(ProductOrder::productId);
 
-                return productIds.map(productId -> ProductDatabase.INSTANCE.data.stream().filter(p -> p.id().equals(productId)).toList().get(0)).toList();
+                return productIds.map(productId -> ProductsDatabase.INSTANCE.data.stream().filter(p -> p.id().equals(productId)).toList().get(0)).toList();
             }
         }
 
@@ -21,7 +21,7 @@ public record Order(Integer id, String date, String login, Status status) {
     }
 
     public enum Status {
-        None("Новый"), Payed("Оплачено"), Shipped("Доставлено");
+        New(Strings.NewOrder), Payed(Strings.PayedOrder), Shipped(Strings.ShippedOrder);
 
         public final String nameRu;
 

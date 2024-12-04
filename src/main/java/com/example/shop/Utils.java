@@ -11,13 +11,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+@SuppressWarnings("SameParameterValue")
 public class Utils {
+    private static final String LogoLocation = "logo.png";
+
     static void setIcon(Stage stage, String iconLocation) {
         stage.getIcons().add(new Image(Objects.requireNonNull(ApplicationHolder.INSTANCE.getResource(iconLocation)).toString()));
     }
 
     static void setDefaultIcon(Stage stage) {
-        setIcon(stage, "logo.png");
+        setIcon(stage, LogoLocation);
     }
 
     static void openScene(Stage stage, String sceneLocation) throws IOException {
@@ -66,7 +69,7 @@ public class Utils {
 
     static void showErrorMessage(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Ошибка");
+        alert.setTitle(Strings.SomethingWentWrong);
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
@@ -82,5 +85,17 @@ public class Utils {
 
     interface OnControllerReadyListener<T> {
         void onControllerReady(T controller);
+    }
+
+    public static void runCatching(Catching block) {
+        try {
+            block.run();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public interface Catching {
+        void run() throws Exception;
     }
 }

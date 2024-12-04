@@ -21,7 +21,7 @@ public class StatsController {
 
     @FXML
     public void initialize() {
-        var products = ProductDatabase.INSTANCE.data.stream().map(Product::name).toList();
+        var products = ProductsDatabase.INSTANCE.data.stream().map(Product::name).toList();
         productNames.addAll(products);
         xAxis.setCategories(productNames);
         setProductData(OrdersDatabase.INSTANCE.data);

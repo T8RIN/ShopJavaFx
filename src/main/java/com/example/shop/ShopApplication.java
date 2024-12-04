@@ -15,7 +15,7 @@ public class ShopApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         ApplicationHolder.INSTANCE.inject(this);
-        stage.setTitle("Shop");
-        openScene(stage, "login.fxml", 320, 240);
+        stage.setTitle(Strings.AppTitle);
+        openScene(stage, Routes.Login, 320, 240);
     }
 }

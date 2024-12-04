@@ -34,8 +34,8 @@
         </rowConstraints>
     </GridPane>
     <HBox alignment="CENTER" spacing="20">
-        <Button fx:id="okButton" onAction="#handleOk" text="OK"/>
+        <Button onAction="#handleOk" text="OK"/>
 
-        <Button fx:id="cancelButton" alignment="CENTER" onAction="#handleCancel" text="Cancel"/>
+        <Button alignment="CENTER" onAction="#handleCancel" text="Cancel"/>
     </HBox>
 </VBox>

@@ -17,23 +17,20 @@ public class RegistrationController {
     private TextField textFieldPassword;
 
     @FXML
-    private void handleRegister() {
+    private void handleRegister() throws IOException {
         String login = textFieldLogin.getText();
         String password = textFieldPassword.getText();
 
         if (login.isBlank() || password.isBlank()) {
-            showErrorMessage("Зполните оба поля");
+            showErrorMessage(Strings.AllFieldShouldBeFilled);
         } else if (!UserDatabase.INSTANCE.appendEntry(new User(login, password))) {
-            showErrorMessage("Этот логин уже существует.");
+            showErrorMessage(Strings.LoginAlreadyExits);
         } else {
             goBackToLoginForm();
         }
     }
 
-    private void goBackToLoginForm() {
-        try {
-            openScene((Stage) textFieldLogin.getScene().getWindow(), "login.fxml", 320, 240);
-        } catch (IOException ignored) {
-        }
+    private void goBackToLoginForm() throws IOException {
+        openScene((Stage) textFieldLogin.getScene().getWindow(), Routes.Login, 320, 240);
     }
 }

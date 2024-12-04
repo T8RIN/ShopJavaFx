@@ -32,7 +32,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void showCatalogWindow() throws IOException {
-        openSceneWindowed("catalog.fxml", "Catalog", 500, 500);
+        openSceneWindowed(Routes.Catalog, Strings.Catalog, 500, 500);
     }
 
     @FXML
@@ -42,31 +42,37 @@ public class MainController implements Initializable {
 
     @FXML
     private void showStatistics() throws IOException {
-        openModalScene("stats.fxml", "Statistics", null);
+        openModalScene(Routes.Stats, Strings.Stats, null);
     }
 
 
     @FXML
     private void showAbout() {
-        showMessage("О программе", "Программа Учебная.  версия 1.0.");
+        showMessage(Strings.AboutApp, Strings.AboutAppSub);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            var loader = new FXMLLoader();
-            loader.setLocation(Objects.requireNonNull(getClass().getResource("catalog.fxml")));
-            catalogTab.setContent(loader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            var loader = new FXMLLoader();
-            loader.setLocation(Objects.requireNonNull(getClass().getResource("orders.fxml")));
-            ordersTab.setContent(loader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        runCatching(
+                () -> {
+                    var loader = new FXMLLoader();
+                    loader.setLocation(Objects.requireNonNull(getClass().getResource(Routes.Catalog)));
+                    catalogTab.setContent(loader.load());
+                }
+        );
+        runCatching(
+                () -> {
+                    var loader = new FXMLLoader();
+                    loader.setLocation(Objects.requireNonNull(getClass().getResource(Routes.Catalog)));
+                    catalogTab.setContent(loader.load());
+                }
+        );
+        runCatching(
+                () -> {
+                    var loader = new FXMLLoader();
+                    loader.setLocation(Objects.requireNonNull(getClass().getResource(Routes.Orders)));
+                    ordersTab.setContent(loader.load());
+                }
+        );
     }
 }

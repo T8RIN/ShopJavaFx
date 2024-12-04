@@ -4,7 +4,7 @@ public final class OrdersDatabase extends Database<Order> {
     public static OrdersDatabase INSTANCE = new OrdersDatabase();
 
     private OrdersDatabase() {
-        super("orders.txt", ",", row -> new Order(Integer.parseInt(row.get(0)), row.get(1), row.get(2), Order.Status.values()[Integer.parseInt(row.get(3))]));
+        super(DatabaseLocations.Orders, ",", row -> new Order(Integer.parseInt(row.get(0)), row.get(1), row.get(2), Order.Status.values()[Integer.parseInt(row.get(3))]));
     }
 
     @Override

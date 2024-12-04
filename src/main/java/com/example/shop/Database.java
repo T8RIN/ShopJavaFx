@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.shop.Utils.runCatching;
+
 public abstract class Database<T> {
 
     final ArrayList<T> data = new ArrayList<>();
@@ -18,18 +20,20 @@ public abstract class Database<T> {
         this.delimiter = delimiter;
         fileLocation = file;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileLocation))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                var split = line.split(delimiter);
-                var row = new ArrayList<String>();
-                for (String s : split) {
-                    row.add(s.strip().trim());
+        runCatching(
+                () -> {
+                    BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        var split = line.split(delimiter);
+                        var row = new ArrayList<String>();
+                        for (String s : split) {
+                            row.add(s.strip().trim());
+                        }
+                        data.add(fromStringsMapper.map(row));
+                    }
                 }
-                data.add(fromStringsMapper.map(row));
-            }
-        } catch (IOException ignored) {
-        }
+        );
     }
 
     abstract ToRowMapper<T> getToRowMapper();
@@ -44,11 +48,14 @@ public abstract class Database<T> {
         } else {
             data.remove(databaseEntry);
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation))) {
-                for (T entry : data) {
-                    writer.write(String.join(delimiter, getToRowMapper().map(entry)) + "\n");
-                }
-            }
+            runCatching(
+                    () -> {
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation));
+                        for (T entry : data) {
+                            writer.write(String.join(delimiter, getToRowMapper().map(entry)) + "\n");
+                        }
+                    }
+            );
 
             return true;
         }
@@ -57,10 +64,13 @@ public abstract class Database<T> {
     public boolean appendEntry(T databaseEntry) {
         if (!isEntryExists(databaseEntry)) {
             data.add(databaseEntry);
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation, true))) {
-                writer.write(String.join(delimiter, getToRowMapper().map(databaseEntry)) + "\n");
-            } catch (IOException ignored) {
-            }
+
+            runCatching(
+                    () -> {
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation, true));
+                        writer.write(String.join(delimiter, getToRowMapper().map(databaseEntry)) + "\n");
+                    }
+            );
 
             return true;
         }

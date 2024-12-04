@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static com.example.shop.Utils.openScene;
+import static com.example.shop.Utils.runCatching;
 
 public class LoginController {
     @FXML
@@ -24,7 +25,7 @@ public class LoginController {
 
     @FXML
     private void handleRegisterLink() throws IOException {
-        openScene((Stage) registerLink.getScene().getWindow(), "registration.fxml", 320, 240);
+        openScene((Stage) registerLink.getScene().getWindow(), Routes.Registration, 320, 240);
     }
 
     @FXML
@@ -34,27 +35,21 @@ public class LoginController {
         User user = new User(login.strip(), password.strip());
 
         if (UserDatabase.INSTANCE.isEntryExists(user)) {
-            label.setText("Вход успешен");
-            if (login.equals("admin")) {
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(1000);
-                        Platform.runLater(
-                                () -> {
-                                    try {
-                                        openScene((Stage) registerLink.getScene().getWindow(), "main.fxml");
-                                    } catch (Exception e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                }
-                        );
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }).start();
+            label.setText(Strings.LoginSuccess);
+            if (login.equals(Strings.AdminLogin)) {
+                new Thread(() -> runCatching(
+                        () -> {
+                            Thread.sleep(1000);
+                            Platform.runLater(
+                                    () -> runCatching(
+                                            () -> openScene((Stage) registerLink.getScene().getWindow(), Routes.Main)
+                                    )
+                            );
+                        }
+                )).start();
             }
         } else {
-            label.setText("Неверный логин или пароль");
+            label.setText(Strings.LoginFailure);
         }
     }
 }

@@ -57,18 +57,18 @@ public class CatalogController implements Initializable {
         if (selectedIndex >= 0) {
             deleteProductImpl(productData.get(selectedIndex));
         } else {
-            showErrorMessage("Выберите товар в таблице");
+            showErrorMessage(Strings.NoProductSelected);
         }
     }
 
     private boolean deleteProductImpl(Product product) throws IOException {
         productData.remove(product);
-        return ProductDatabase.INSTANCE.deleteEntry(product);
+        return ProductsDatabase.INSTANCE.deleteEntry(product);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        productData.addAll(ProductDatabase.INSTANCE.data);
+        productData.addAll(ProductsDatabase.INSTANCE.data);
         productId.setCellValueFactory(
                 p -> new SimpleStringProperty(p.getValue().id().toString())
         );
@@ -93,17 +93,15 @@ public class CatalogController implements Initializable {
     @FXML
     private void addProduct() throws IOException {
         openModalScene(
-                "product-edit.fxml",
-                "Edit Product",
-                (Utils.OnControllerReadyListener<ProductEditController>) controller -> {
-                    controller.setSaveListener(
-                            product -> {
-                                ProductDatabase.INSTANCE.appendEntry(product);
-                                productData.add(product);
-                                return true;
-                            }
-                    );
-                }
+                Routes.ProductEdit,
+                Strings.EditProduct,
+                (Utils.OnControllerReadyListener<ProductEditController>) controller -> controller.setSaveListener(
+                        product -> {
+                            ProductsDatabase.INSTANCE.appendEntry(product);
+                            productData.add(product);
+                            return true;
+                        }
+                )
         );
     }
 
@@ -113,13 +111,13 @@ public class CatalogController implements Initializable {
         if (selectedIndex >= 0) {
             var selectedProduct = productData.get(selectedIndex);
             openModalScene(
-                    "product-edit.fxml",
-                    "Edit Product",
+                    Routes.ProductEdit,
+                    Strings.EditProduct,
                     (Utils.OnControllerReadyListener<ProductEditController>) controller -> {
                         controller.setProduct(selectedProduct);
                         controller.setSaveListener(
                                 product -> {
-                                    ProductDatabase.INSTANCE.appendEntry(product);
+                                    ProductsDatabase.INSTANCE.appendEntry(product);
                                     productData.add(product);
                                     return deleteProductImpl(selectedProduct);
                                 }
@@ -127,7 +125,7 @@ public class CatalogController implements Initializable {
                     }
             );
         } else {
-            showErrorMessage("Выберите товар в таблице");
+            showErrorMessage(Strings.NoProductSelected);
         }
     }
 }
