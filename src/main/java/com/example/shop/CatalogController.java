@@ -94,6 +94,7 @@ public class CatalogController implements Initializable {
     private void addProduct() throws IOException {
         openModalScene(
                 "product-edit.fxml",
+                "Edit Product",
                 (Utils.OnControllerReadyListener<ProductEditController>) controller -> {
                     controller.setSaveListener(
                             product -> {
@@ -113,6 +114,7 @@ public class CatalogController implements Initializable {
             var selectedProduct = productData.get(selectedIndex);
             openModalScene(
                     "product-edit.fxml",
+                    "Edit Product",
                     (Utils.OnControllerReadyListener<ProductEditController>) controller -> {
                         controller.setProduct(selectedProduct);
                         controller.setSaveListener(

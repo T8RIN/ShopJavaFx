@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.shop.StatsController">
+    <BarChart fx:id="barChart" prefHeight="400.0" prefWidth="600.0">
+        <xAxis>
+            <CategoryAxis fx:id="xAxis" label="Товары"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Количество продано"/>
+        </yAxis>
+    </BarChart>
+</AnchorPane>

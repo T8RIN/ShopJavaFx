@@ -32,9 +32,9 @@ public class Utils {
         void onControllerReady(T controller);
     }
 
-    static <T> void openModalScene(String sceneLocation, OnControllerReadyListener<T> onControllerReadyListener) throws IOException {
+    static <T> void openModalScene(String sceneLocation, String title, OnControllerReadyListener<T> onControllerReadyListener) throws IOException {
         Stage stage = new Stage();
-        stage.setTitle("Edit Product");
+        stage.setTitle(title);
         FXMLLoader loader = new FXMLLoader(ApplicationHolder.INSTANCE.getResource(sceneLocation));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
@@ -43,7 +43,9 @@ public class Utils {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(null);
 
-        onControllerReadyListener.onControllerReady(loader.getController());
+        if(onControllerReadyListener != null) {
+            onControllerReadyListener.onControllerReady(loader.getController());
+        }
 
         stage.showAndWait();
     }

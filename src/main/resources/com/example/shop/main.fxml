@@ -7,8 +7,8 @@
     <top>
         <MenuBar>
             <Menu mnemonicParsing="false" text="Заказы">
-                <MenuItem mnemonicParsing="false" onAction="#showOrders" text="Посмотреть список заказов" />
-                <MenuItem mnemonicParsing="false" onAction="#showOrdersWindow" text="Открыть список заказов в новом окне" />
+                <MenuItem mnemonicParsing="false" onAction="#showOrders" text="Посмотреть все заказов" />
+                <MenuItem mnemonicParsing="false" onAction="#showStatistics" text="Просмотреть статистику" />
             </Menu>
             <Menu mnemonicParsing="false" text="Товары">
                 <MenuItem mnemonicParsing="false" onAction="#showCatalog" text="Посмотреть каталог товаров" />

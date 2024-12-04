@@ -11,8 +11,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.example.shop.Utils.openSceneWindowed;
-import static com.example.shop.Utils.showMessage;
+import static com.example.shop.Utils.*;
 
 public class MainController implements Initializable {
 
@@ -42,8 +41,8 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void showOrdersWindow() throws IOException {
-        openSceneWindowed("orders.fxml", "Orders", 500, 500);
+    private void showStatistics() throws IOException {
+        openModalScene("stats.fxml", "Statistics", null);
     }
 
 
