@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<VBox alignment="CENTER" minHeight="350" minWidth="350" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shop.ProductEditController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" minHeight="350" minWidth="350"
+      xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.shop.ProductEditController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <GridPane alignment="CENTER" hgap="10" minHeight="240" minWidth="240" vgap="10">
-        <Label text="Артикул" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="idField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Артикул" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="idField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-        <Label text="Наименование" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Наименование" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <Label text="Количество" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="quantityField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Количество" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="quantityField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-        <Label text="Стоимость" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <columnConstraints>
-         <ColumnConstraints />
-         <ColumnConstraints />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
+        <Label text="Стоимость" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+        </rowConstraints>
     </GridPane>
     <HBox alignment="CENTER" spacing="20">
         <Button fx:id="okButton" onAction="#handleOk" text="OK"/>

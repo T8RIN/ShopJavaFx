@@ -6,8 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
+
 public class OrdersController {
 
+    private final ObservableList<Order> orders = FXCollections.observableArrayList();
+    private final ObservableList<Product> products = FXCollections.observableArrayList();
+    private final ObservableList<Order.Status> statusList = FXCollections.observableArrayList(Order.Status.values());
     @FXML
     private TableView<Order> ordersTable;
     @FXML
@@ -16,11 +21,10 @@ public class OrdersController {
     private TableColumn<Order, String> orderDateColumn;
     @FXML
     private TableColumn<Order, String> orderLoginColumn;
-
     @FXML
     private Label orderNumberLabel;
     @FXML
-    private ComboBox<String> statusComboBox;
+    private ComboBox<Order.Status> statusComboBox;
     @FXML
     private TableView<Product> productsTable;
     @FXML
@@ -31,15 +35,11 @@ public class OrdersController {
     private TableColumn<Product, String> productSumColumn;
     @FXML
     private Label totalAmountLabel;
-
     @FXML
     private Button saveButton;
     @FXML
     private Button cancelButton;
-
-    private final ObservableList<Order> orders = FXCollections.observableArrayList();
-    private final ObservableList<Product> products = FXCollections.observableArrayList();
-    private final ObservableList<String> statusList = FXCollections.observableArrayList("Новый", "Доставлено", "Оплачено");
+    private Order selectedOrder;
 
     @FXML
     private void initialize() {
@@ -68,7 +68,7 @@ public class OrdersController {
         productsTable.setItems(products);
 
         statusComboBox.setItems(statusList);
-        statusComboBox.setValue("Новый");
+        statusComboBox.setValue(Order.Status.None);
 
         ordersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldOrder, newOrder) -> {
             if (newOrder != null) {
@@ -87,20 +87,39 @@ public class OrdersController {
     }
 
     private void showOrderDetails(Order order) {
+        selectedOrder = order;
         orderNumberLabel.setText(order.id().toString());
         products.setAll(order.products());
-        statusComboBox.setDisable(false);
+        statusComboBox.setValue(order.status());
 
         double totalSum = products.stream().mapToDouble(Product::sum).sum();
         totalAmountLabel.setText(String.format("%.2f", totalSum));
     }
 
+
     private void handleSave() {
-        System.out.println("Сохранение изменений...");
+        var selectedStatus = statusComboBox.getSelectionModel().getSelectedItem();
+        var selectedOrder = this.selectedOrder;
+        var newOrder = selectedOrder.copyWithNewStatus(selectedStatus);
+
+        try {
+            OrdersDatabase.INSTANCE.deleteEntry(selectedOrder);
+            orders.remove(selectedOrder);
+            OrdersDatabase.INSTANCE.appendEntry(newOrder);
+            orders.add(newOrder);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        statusComboBox.setDisable(true);
     }
 
     private void handleCancel() {
-        System.out.println("Отмена изменений...");
+        statusComboBox.setDisable(true);
     }
 
+    @FXML
+    public void activateStatusComboBox() {
+        statusComboBox.setDisable(false);
+    }
 }

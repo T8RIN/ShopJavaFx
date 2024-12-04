@@ -26,10 +26,6 @@ public class ProductEditController {
 
     private SaveListener saveListener;
 
-    interface SaveListener {
-        boolean save(Product product) throws IOException;
-    }
-
     void setSaveListener(SaveListener listener) {
         saveListener = listener;
     }
@@ -60,8 +56,8 @@ public class ProductEditController {
             return;
         }
 
-        if(saveListener.save(
-            new Product(name, Integer.parseInt(id), Integer.parseInt(quantity), Double.parseDouble(price))
+        if (saveListener.save(
+                new Product(name, Integer.parseInt(id), Integer.parseInt(quantity), Double.parseDouble(price))
         )) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Данные сохранены");
@@ -90,5 +86,9 @@ public class ProductEditController {
         nameField.setText(product.name());
         priceField.setText(product.sum().toString());
         quantityField.setText(product.count().toString());
+    }
+
+    interface SaveListener {
+        boolean save(Product product) throws IOException;
     }
 }

@@ -35,7 +35,7 @@ public class LoginController {
 
         if (UserDatabase.INSTANCE.isEntryExists(user)) {
             label.setText("Вход успешен");
-            if(login.equals("admin")) {
+            if (login.equals("admin")) {
                 new Thread(() -> {
                     try {
                         Thread.sleep(1000);

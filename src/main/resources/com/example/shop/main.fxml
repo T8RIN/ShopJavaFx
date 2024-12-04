@@ -2,34 +2,36 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shop.MainController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="500.0"
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.shop.MainController">
     <top>
         <MenuBar>
             <Menu mnemonicParsing="false" text="Заказы">
-                <MenuItem mnemonicParsing="false" onAction="#showOrders" text="Посмотреть все заказов" />
-                <MenuItem mnemonicParsing="false" onAction="#showStatistics" text="Просмотреть статистику" />
+                <MenuItem mnemonicParsing="false" onAction="#showOrders" text="Посмотреть все заказов"/>
+                <MenuItem mnemonicParsing="false" onAction="#showStatistics" text="Просмотреть статистику"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Товары">
-                <MenuItem mnemonicParsing="false" onAction="#showCatalog" text="Посмотреть каталог товаров" />
-                <MenuItem mnemonicParsing="false" onAction="#showCatalogWindow" text="Открыть каталог в новом окне" />
+                <MenuItem mnemonicParsing="false" onAction="#showCatalog" text="Посмотреть каталог товаров"/>
+                <MenuItem mnemonicParsing="false" onAction="#showCatalogWindow" text="Открыть каталог в новом окне"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Помощь">
-                <MenuItem mnemonicParsing="false" onAction="#showAbout" text="О программе" />
+                <MenuItem mnemonicParsing="false" onAction="#showAbout" text="О программе"/>
             </Menu>
         </MenuBar>
     </top>
 
-   <center>
-       <AnchorPane>
-           <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <Tab fx:id="catalogTab" text="Товары" />
-               <Tab fx:id="ordersTab" text="Заказы" />
-           </TabPane>
-       </AnchorPane>
-   </center>
+    <center>
+        <AnchorPane>
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
+                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Tab fx:id="catalogTab" text="Товары"/>
+                <Tab fx:id="ordersTab" text="Заказы"/>
+            </TabPane>
+        </AnchorPane>
+    </center>
 
     <bottom>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="Infinity" text="Данное приложение создано студентом группы 09-353 М.М.М." />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="Infinity"
+               text="Данное приложение создано студентом группы 09-353 М.М.М."/>
     </bottom>
 </BorderPane>

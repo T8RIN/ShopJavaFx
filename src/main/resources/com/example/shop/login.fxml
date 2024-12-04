@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<VBox alignment="CENTER" spacing="12.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.shop.LoginController">
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="12.0" xmlns="http://javafx.com/javafx/17.0.12"
+      fx:controller="com.example.shop.LoginController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="label" text="Выполните вход" />
-    <TextField fx:id="textFieldLogin" prefWidth="150.0" promptText="Логин" />
-    <TextField fx:id="textFieldPassword" prefWidth="150.0" promptText="Пароль" />
-    <Button alignment="CENTER" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="146.0" text="Войти" />
-    <Hyperlink fx:id="registerLink" onAction="#handleRegisterLink" text="Зарегистрироваться" layoutX="150.0" layoutY="100.0" />
+    <Label fx:id="label" text="Выполните вход"/>
+    <TextField fx:id="textFieldLogin" prefWidth="150.0" promptText="Логин"/>
+    <TextField fx:id="textFieldPassword" prefWidth="150.0" promptText="Пароль"/>
+    <Button alignment="CENTER" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="146.0" text="Войти"/>
+    <Hyperlink fx:id="registerLink" onAction="#handleRegisterLink" text="Зарегистрироваться" layoutX="150.0"
+               layoutY="100.0"/>
 </VBox>

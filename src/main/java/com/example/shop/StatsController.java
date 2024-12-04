@@ -13,12 +13,11 @@ import java.util.stream.Collectors;
 
 public class StatsController {
 
+    private final ObservableList<String> productNames = FXCollections.observableArrayList();
     @FXML
     private BarChart<String, Number> barChart;
     @FXML
     private CategoryAxis xAxis;
-
-    private final ObservableList<String> productNames = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {

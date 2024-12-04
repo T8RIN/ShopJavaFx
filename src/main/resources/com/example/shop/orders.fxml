@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="500" prefWidth="500" xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shop.OrdersController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500" prefWidth="500"
+            xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.shop.OrdersController">
     <SplitPane dividerPositions="0.47391653290529695" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <VBox spacing="10">
@@ -19,7 +19,7 @@
                     <TableColumn fx:id="orderLoginColumn" text="Логин"/>
                 </columns>
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
             </TableView>
         </VBox>
@@ -33,7 +33,8 @@
                 <Label fx:id="orderNumberLabel" GridPane.columnIndex="1"/>
                 <Label text="Статус заказа:" GridPane.rowIndex="1"/>
                 <ComboBox fx:id="statusComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Button text="Изменить" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Button text="Изменить" onAction="#activateStatusComboBox" GridPane.columnIndex="2"
+                        GridPane.rowIndex="1"/>
                 <Label text="Товары в заказе:" GridPane.rowIndex="2"/>
                 <TableView fx:id="productsTable" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="2">
                     <columns>
@@ -42,7 +43,7 @@
                         <TableColumn fx:id="productSumColumn" text="Цена"/>
                     </columns>
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TableView>
                 <Label text="Сумма заказа:" GridPane.rowIndex="3"/>

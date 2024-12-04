@@ -28,10 +28,6 @@ public class Utils {
         stage.show();
     }
 
-    interface OnControllerReadyListener<T> {
-        void onControllerReady(T controller);
-    }
-
     static <T> void openModalScene(String sceneLocation, String title, OnControllerReadyListener<T> onControllerReadyListener) throws IOException {
         Stage stage = new Stage();
         stage.setTitle(title);
@@ -43,7 +39,7 @@ public class Utils {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(null);
 
-        if(onControllerReadyListener != null) {
+        if (onControllerReadyListener != null) {
             onControllerReadyListener.onControllerReady(loader.getController());
         }
 
@@ -82,5 +78,9 @@ public class Utils {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    interface OnControllerReadyListener<T> {
+        void onControllerReady(T controller);
     }
 }
