@@ -56,9 +56,27 @@ public class Utils {
         stage.show();
     }
 
+    static void openSceneWindowed(String sceneLocation, String title, int width, int height) throws IOException {
+        var stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(ApplicationHolder.INSTANCE.getResource(sceneLocation));
+        Parent root = loader.load();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, width, height));
+        setDefaultIcon(stage);
+        stage.show();
+    }
+
     static void showErrorMessage(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Ошибка");
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    static void showMessage(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();

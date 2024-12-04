@@ -35,22 +35,24 @@ public class LoginController {
 
         if (UserDatabase.INSTANCE.isEntryExists(user)) {
             label.setText("Вход успешен");
-            new Thread(() -> {
-                try {
-                    Thread.sleep(1500);
-                    Platform.runLater(
-                            () -> {
-                                try {
-                                    openScene((Stage) registerLink.getScene().getWindow(), "catalog.fxml");
-                                } catch (Exception e) {
-                                    throw new RuntimeException(e);
+            if(login.equals("admin")) {
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(1000);
+                        Platform.runLater(
+                                () -> {
+                                    try {
+                                        openScene((Stage) registerLink.getScene().getWindow(), "main.fxml");
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
                                 }
-                            }
-                    );
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }).start();
+                        );
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }).start();
+            }
         } else {
             label.setText("Неверный логин или пароль");
         }
