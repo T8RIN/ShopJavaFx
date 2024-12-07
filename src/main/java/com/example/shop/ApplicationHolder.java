@@ -1,7 +1,6 @@
 package com.example.shop;
 
 import javafx.application.Application;
-
 import java.net.URL;
 
 public final class ApplicationHolder {
